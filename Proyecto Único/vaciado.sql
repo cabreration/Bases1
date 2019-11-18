@@ -1,0 +1,15 @@
+drop table temporal;
+drop table temporal2;
+drop table invento;
+drop table area_profesional;
+drop table profesional;
+drop table area_investigacion;
+drop table frontera;
+drop table pais;
+drop table region;
+drop table invento_inventor;
+drop table inventor;
+drop table pais_respuesta;
+drop table respuesta;
+drop table pregunta;
+drop table encuesta;
