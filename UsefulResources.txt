@@ -1,0 +1,14 @@
+Global Database Name: XE
+System Identifier(SID): XE
+
+Connect string:
+
+Pluggable database: localhost.localdomain/XEPDB1
+Multitenant container database: localhost.localdomain
+use https://localhost:5500/em to access Oracle Entreprise Manager for Oracle Database XE
+
+export ORACLE_HOME=/opt/oracle/product/18c/dbhomeXE
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$ORACLE_HOME/lib
+export PATH=$PATH:$ORACLE_HOME/bin
+export ORACLE_SID=XE
+export ORAENV_ASK=NO
