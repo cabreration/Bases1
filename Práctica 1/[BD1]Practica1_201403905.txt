@@ -1,0 +1,155 @@
+CREATE TABLE Pais(
+	codigo INT NOT NULL,
+	nombre VARCHAR(255) NOT NULL,
+	PRIMARY KEY (codigo)
+);
+
+-----> Descrición de las restricciones de Integridad:
+     > La restricción de atributos es definida por los tipos de datos de las columnas, en el caso de la columna codigo únicamente podrán ser insertados valores de tipo entero, cualquier otro tipo de valor causará un error, mientras que en el caso de la columna nombre, el tipo de dato varchar define que únicamente se admiten valores de tipo cadena de caracteres, cualquier otro tipo de valor resultará en un error
+     > La directiva NOT NULL define una restricción de no permitir valores nulos para ambas columnas.
+     > Las directivas NOT NULL y PRIMARY KEY sobre la columna codigo definen la regla de integridad de las entidades o clave primaria para la entidad Pais. Ya que la directiva PRIMARY KEY garantiza la unicidad de la columna no es necesario agregar una cláusula UNIQUE. 
+
+CREATE TABLE Profesion(
+	codigo INT NOT NULL,
+	nombre VARCHAR(255) NOT NULL,
+	PRIMARY KEY (codigo)
+);
+
+-----> Descrición de las restricciones de Integridad:
+     > Los tipos de datos de las columnas definen las restricciones de atributo requeridas en la lógica del negocio, en el caso de la columna codigo únicamente podrán ser insertados valores de tipo entero, mientras que en el caso de la columna nombre, el tipo de dato varchar define que únicamente se admiten valores de tipo cadena de caracteres.
+     > La directiva NOT NULL define una restricción de no permitir valores nulos, ya que ambas columnas incluyen esta directiva ninguna de ellas admitirá valores nulos.
+     > Las directivas NOT NULL y PRIMARY KEY sobre la columna codigo definen la regla de integridad de las entidades o clave primaria para la entidad Profesion. Ya que la directiva PRIMARY KEY garantiza la unicidad de la columna no es necesario agregar una cláusula UNIQUE.
+     
+
+CREATE TABLE Miembros(
+	codigo INT NOT NULL, 
+	dpi INT NOT NULL UNIQUE,
+	nombre VARCHAR(255) NOT NULL,
+	apellido VARCHAR(255) NOT NULL,
+	edad INT NOT NULL,
+	telefono INT, 
+	residencia VARCHAR(2048) NOT NULL,
+	pais INT NOT NULL,
+	profesion INT NOT NULL,
+	CHECK (edad <= 25),
+	PRIMARY KEY (codigo),
+	FOREIGN KEY (pais) REFERENCES Pais(codigo),
+	FOREIGN KEY (profesion) REFERENCES Profesion(codigo)
+);
+
+-----> Descripción de las restricciones de integridad:
+     > Los tipos de datos de las columnas definen la restricción de atributo, en sql existen muchos tipos de datos que son similares entre sí, por ejemplo el tipo int y el tipo smallInt o el tipo varchar y el tipo text, que admiten los mismos tipos de valores con longitudes diferentes. Al escoger un tipo de dato lo importante es que cumpla con todos los requisitos del atributo.
+     > La directiva NOT NULL define la restricción de no permitir valores nulos, la columna telefono no incluye esta directiva, por lo que será posible dejar vacía esa columna a la hora de insertar un registro.
+     > La directiva CHECK (condicion) permite chequear una codición antes de insertar un registro, en este caso la condición es que la edad no pase los 25 años.
+     > Las direcivas NOT NULL y PRIMARY KEY definen la clave primaria de la entidad y así la regla de integridad de la entidad.
+     > La directiva UNIQUE define la restricción de llave secundaria o alterna para la columna dpi, esta directiva garantiza la unicidad de la columna.
+     > La directiva FOREIGN KEY(columna) REFERENCES Tabla(columna) define la regla de integridad de referencial, la primer columna representa la columna de la entidad actual, Tabla representa la Tabla a la cual se hará referencia y la segunda columna representa la columna a la cual se hará referencia en Tabla.
+
+CREATE TABLE Disciplina(
+	codigo INT NOT NULL,
+	nombre VARCHAR(255) NOT NULL,
+	descripcion VARCHAR(4096),
+	PRIMARY KEY (codigo)
+);
+
+-----> Descrición de las restricciones de Integridad:
+     > Los tipos de datos de las columnas definen las restricciones de atributo requeridas en la lógica del negocio, en el caso de la columna codigo únicamente podrán ser insertados valores de tipo entero, mientras que en el caso de las columna nombre y descripción, el tipo de dato varchar define que únicamente se admitirán valores de tipo cadena de caracteres.
+     > La directiva NOT NULL define una restricción de no permitir valores nulos, la columna descripción no lleva esta directiva, por lo que será posible que existan valores nulos.
+     > Las directivas NOT NULL y PRIMARY KEY sobre la columna codigo definen la regla de integridad de las entidades o clave primaria para la entidad Disciplina. Ya que la directiva PRIMARY KEY garantiza la unicidad de la columna no es necesario agregar una cláusula UNIQUE.
+
+CREATE TABLE Tipo_Medalla(
+	codigo INT NOT NULL, 
+	nombre VARCHAR(16) NOT NULL,
+	PRIMARY KEY (codigo)
+);
+
+-----> Descrición de las restricciones de Integridad:
+     > Los tipos de datos de las columnas definen las restricciones de atributo requeridas en la lógica del negocio, en el caso de la columna codigo únicamente podrán ser insertados valores de tipo entero, mientras que en el caso de la columna nombre, el tipo de dato varchar define que únicamente se admiten valores de tipo cadena de caracteres.
+     > La directiva NOT NULL define una restricción de no permitir valores nulos, ya que ambas columnas incluyen esta directiva ninguna de ellas admitirá valores nulos.
+     > Las directivas NOT NULL y PRIMARY KEY sobre la columna codigo definen la regla de integridad de las entidades o clave primaria para la entidad Tipo_Medalla. Ya que la directiva PRIMARY KEY garantiza la unicidad de la columna no es necesario agregar una cláusula UNIQUE.
+
+CREATE TABLE Categoria(
+	codigo INT NOT NULL,
+	categoria VARCHAR(48) NOT NULL,
+	PRIMARY KEY (codigo)
+);
+
+-----> Descrición de las restricciones de Integridad:
+     > Los tipos de datos de las columnas definen las restricciones de atributo requeridas en la lógica del negocio, en el caso de la columna codigo únicamente podrán ser insertados valores de tipo entero, mientras que en el caso de la columna categoria, el tipo de dato varchar define que únicamente se admiten valores de tipo cadena de caracteres.
+     > La directiva NOT NULL define una restricción de no permitir valores nulos, ya que ambas columnas incluyen esta directiva ninguna de ellas admitirá valores nulos.
+     > Las directivas NOT NULL y PRIMARY KEY sobre la columna codigo definen la regla de integridad de las entidades o clave primaria para la entidad Categoria. Ya que la directiva PRIMARY KEY garantiza la unicidad de la columna no es necesario agregar una cláusula UNIQUE.
+
+CREATE TABLE Tipo_Participacion(
+	codigo INT NOT NULL, 
+	tipo VARCHAR(48) NOT NULL,
+	PRIMARY KEY (codigo)
+);
+
+-----> Descrición de las restricciones de Integridad:
+     > Los tipos de datos de las columnas definen las restricciones de atributo requeridas en la lógica del negocio, en el caso de la columna codigo únicamente podrán ser insertados valores de tipo entero, mientras que en el caso de la columna tipo, el tipo de dato varchar define que únicamente se admiten valores de tipo cadena de caracteres. Cualquier otro tipo de dato resultará en error.
+     > La directiva NOT NULL define una restricción de no permitir valores nulos, ya que ambas columnas incluyen esta directiva ninguna de ellas admitirá valores nulos.
+     > Las directivas NOT NULL y PRIMARY KEY sobre la columna codigo definen la regla de integridad de las entidades o clave primaria para la entidad Tipo_Participacion. Ya que la directiva PRIMARY KEY garantiza la unicidad de la columna no es necesario agregar una cláusula UNIQUE.
+
+CREATE TABLE Medallero(
+	pais INT NOT NULL,
+	tipo_medalla INT NOT NULL,
+	cantidad_medallas INT NOT NULL,
+	FOREIGN KEY (pais) REFERENCES Pais(codigo),
+	FOREIGN KEY (tipo_medalla) REFERENCES Tipo_Medalla(codigo)
+);
+
+-----> Descrición de las restricciones de Integridad:
+     > Los tipos de datos de las columnas definen las restricciones de atributo requeridas en la lógica del negocio, en este caso las tres columnas son de tipo numérico, así que solamente valores enteros podrán ser insertados. Cualquier otro tipo de dato resultará en error.
+     > La directiva NOT NULL define una restricción de no permitir valores nulos, ya que todas las columnas incluyen esta directiva ninguna de ellas admitirá valores nulos.
+     > En este caso el enunciado no especifica una regla de integridad para la entidad, de modo que no se incluyó.
+     > La directiva FOREIGN KEY(columna) REFERENCES Tabla(columna) define la regla de integridad de referencial, la primer columna representa la columna de la entidad actual, Tabla representa la Tabla a la cual se hará referencia y la segunda columna representa la columna a la cual se hará referencia en Tabla.
+
+CREATE TABLE Sede(
+	codigo INT NOT NULL,
+	sede VARCHAR(255) NOT NULL,
+	PRIMARY KEY (codigo)
+);
+
+-----> Descrición de las restricciones de Integridad:
+     > Los tipos de datos de las columnas definen las restricciones de atributo requeridas en la lógica del negocio, en el caso de la columna codigo únicamente podrán ser insertados valores de tipo entero, mientras que en el caso de la columna sede, el tipo de dato varchar define que únicamente se admiten valores de tipo cadena de caracteres.
+     > La directiva NOT NULL define una restricción de no permitir valores nulos, ya que ambas columnas incluyen esta directiva ninguna de ellas admitirá valores nulos.
+     > Las directivas NOT NULL y PRIMARY KEY sobre la columna codigo definen la regla de integridad de las entidades o clave primaria para la entidad Sede. La directiva NOT NULL asegura que no existan valores nulos y la directiva PRIMARY KEY garantiza la unicidad de la columna.
+
+CREATE TABLE Evento(
+	codigo INT NOT NULL, 
+	fecha_hora DATETIME NOT NULL,
+	ubicacion INT NOT NULL, 
+	disciplina INT NOT NULL, 
+	tipo_participacion INT NOT NULL,
+	categoria INT NOT NULL,
+	PRIMARY KEY (codigo),
+	FOREIGN KEY (ubicacion) REFERENCES Pais(codigo),
+	FOREIGN KEY (disciplina) REFERENCES Disciplina(codigo),
+	FOREING KEY (tipo_participacion) REFERENCES Tipo_Participacion(codigo),
+	FOREIGN KEY (categoria) REFERENCES Categoria(codigo)
+	CHECK (fecha_hora >= '2020-07-24 09:00:00' and fecha_hora <= '2020-08-09 20:00:00')
+);
+
+-----> Descrición de las restricciones de Integridad:
+     > Los tipos de datos de las columnas definen las restricciones de atributo requeridas en la lógica del negocio, en el caso de las columnas codigo, ubicacion, disciplina, tipo_participacion y categoria únicamente podrán ser insertados valores de tipo entero, mientras que en el caso de la columna fecha_hora, el tipo de dato datetime define que únicamente se admiten valores que representen una fecha y hora.
+     > La directiva NOT NULL define una restricción de no permitir valores nulos, ya que todas las columnas incluyen esta directiva ninguna de ellas admitirá valores nulos.
+     > Las directivas NOT NULL y PRIMARY KEY sobre la columna codigo definen la regla de integridad de las entidades o clave primaria para la entidad Tipo_Medalla.
+     > La directiva CHECK (condicion) permite chequear una codición antes de insertar un registro, en este caso la condición es que la fecha debe estar entre el 24 de Julio del 2020 a las 9:00:00 am y el 09 de Agosto del 2020 a las 20:00:00.
+     > La directiva FOREIGN KEY(columna) REFERENCES Tabla(columna) define la regla de integridad de referencial, la primer columna representa la columna de la entidad actual, Tabla representa la Tabla a la cual se hará referencia y la segunda columna representa la columna a la cual se hará referencia en Tabla. Las columnas ubicacion, disciplina, categoria y tipo_participacion hacen uso de esta restricción de seguridad.
+
+
+/**************************************************************************
+*                                                                         *
+* Observaciones:													      *
+* - A las tablas se les dio el mismo nombre que su varrel correspondiente *
+* en el enunciado, haciendo una combinación de snake_case y PascalCase.   *
+* - La sintaxis utilizada en el documento corresponde al estándar de W3:  *
+*   https://www.w3schools.com/sql/sql_create_table.asp                    *
+* - Las columnas de las tablas fueron nombradas a partir de su atributo   *
+* correspondiente en el varrel al que pertenece, según el estándar        *
+* snake_case                                                              *
+* - Existen diferentes formas de declarar una restricción, en esta prac-  *
+* tica se utilizó la sintaxis que no especifica nombre para la restri-    *
+* cción.                                                                  *
+*                                                                         *  
+**************************************************************************/
